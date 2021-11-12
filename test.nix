@@ -7,4 +7,5 @@ pkgs.callPackage ./default.nix {
   nogui = true;
   evil.enable = true;
   language-support.nix.enable = true;
+  themes.selected = "manoj-dark";
 }
