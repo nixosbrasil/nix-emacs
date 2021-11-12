@@ -14,6 +14,7 @@ let
     modules = [
       (args: mainModule)
       ./base.nix
+      ./modules
     ];
     specialArgs = specialArgs // {
       inherit pkgs;

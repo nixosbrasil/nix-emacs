@@ -7,5 +7,6 @@ pkgs.callPackage ./default.nix {
     (require 'evil)
     (evil-mode 1)
   '';
+  nogui = true;
   plugins = with pkgs.emacsPackages; [ evil ];
 }

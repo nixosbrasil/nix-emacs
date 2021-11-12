@@ -7,7 +7,7 @@ in {
     target = mkOption {
       type = types.attrsOf types.package;
       default = {};
-      visible = true;
+      visible = false;
     };
     identifier = mkOption {
       type = types.str;
@@ -40,7 +40,6 @@ in {
     overrided = config.package.pkgs.withPackages config.plugins;
     flags = config.extraFlags
       ++ ["-l" initEl]
-      # ++ (optional )
     ;
   in {
     target = {
