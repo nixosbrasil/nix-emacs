@@ -10,9 +10,13 @@ in {
   };
   config = mkIf cfg.enable {
     plugins = with pkgs.emacsPackages; [ nix-mode ];
-    initSnippet = ''
-      (require 'nix-mode)
-      (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
-    '';
+    initEl = {
+      pre = ''
+        (require 'nix-mode)
+      '';
+      main = ''
+        (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+      '';
+    };
   };
 }

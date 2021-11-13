@@ -34,7 +34,7 @@ in {
       wombat = [];
     };
     plugins = if cfg.selected == null then [] else cfg.available."${cfg.selected}";
-    initSnippet = if (cfg.selected == null) then "" else ''
+    initEl.main = if (cfg.selected == null) then "" else ''
       (load-theme '${cfg.selected})
     '';
   };

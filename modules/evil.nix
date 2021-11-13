@@ -9,10 +9,14 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    initSnippet = ''
-      (require 'evil)
-      (evil-mode 1)
-    '';
+    initEl = {
+      pre = ''
+        (require 'evil)
+      '';
+      main = ''
+        (evil-mode 1)
+      '';
+    };
     plugins = with pkgs.emacsPackages; [ evil ];
   };
 }

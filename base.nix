@@ -1,7 +1,7 @@
 {pkgs, lib, config, ...}:
 let
   inherit (lib) mkOption types optional;
-  inherit (builtins) toFile concatStringsSep;
+  inherit (builtins) toFile concatStringsSep attrValues;
 in {
   options = {
     target = mkOption {
@@ -29,14 +29,28 @@ in {
       description = "Extra flags to launch the entrypoint";
       default = [];
     };
-    initSnippet = mkOption {
-      type = types.lines;
-      description = "init.el content";
-      default = "";
+    initEl = {
+      pre = mkOption {
+        type = types.lines;
+        description = "init.el pre part for ordering";
+        default = "";
+      };
+      main = mkOption {
+        type = types.lines;
+        description = "init.el pre part for ordering";
+        default = "";
+      };
+      pos = mkOption {
+        type = types.lines;
+        description = "init.el pre part for ordering";
+        default = "";
+      };
     };
   };
   config = let
-    initEl = toFile "init-${config.identifier}.el" config.initSnippet;
+    initEl = toFile "init-${config.identifier}.el" (
+      concatStringsSep "\n" (with config.initEl; [ pre main pos ])
+    );
     overrided = config.package.pkgs.withPackages config.plugins;
     flags = config.extraFlags
       ++ ["-l" initEl]

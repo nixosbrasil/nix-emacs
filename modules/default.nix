@@ -5,5 +5,7 @@
     ./evil.nix
     ./language-support/nix.nix
     ./themes.nix
+    ./org
+    ./traits
   ];
 }
