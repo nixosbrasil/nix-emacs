@@ -10,6 +10,7 @@ pkgs.callPackage ./default.nix {
   evil = {
     enable = true;
     escesc = true;
+    collection = true;
   };
   language-support.nix.enable = true;
   themes.selected = "manoj-dark";

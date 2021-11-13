@@ -3,6 +3,9 @@ let
   inherit (lib) mkOption mkEnableOption mkIf types;
   cfg = config.evil;
 in {
+  imports = [
+    ./collection.nix
+  ];
   options = {
     evil = {
       enable = mkEnableOption "evil-mode";
