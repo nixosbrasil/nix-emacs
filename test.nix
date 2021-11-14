@@ -12,7 +12,10 @@ pkgs.callPackage ./default.nix {
     escesc = true;
     collection = true;
   };
-  language-support.nix.enable = true;
+  language-support = {
+    nix.enable = true;
+    markdown.enable = true;
+  };
   themes.selected = "manoj-dark";
   org.enable = true;
 }
