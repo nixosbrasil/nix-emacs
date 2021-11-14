@@ -4,11 +4,20 @@ let
 in {
   options = {
     evil.collection = mkEnableOption "evil-collection";
-  }
+  };
   config = mkIf (config.evil.enable && config.evil.collection) {
     plugins = with pkgs.emacsPackages; [ evil-collection ];
-    initEl.main = ''
-      (evil-collection-init)
-    '';
+    initEl = {
+      pre = ''
+        (setq evil-want-integration t)
+        (setq evil-want-keybinding nil)
+      '';
+      main = ''
+        (require 'evil-collection nil t)
+      '';
+      pos = ''
+        (evil-collection-init)
+      '';
+    };
   };
 }

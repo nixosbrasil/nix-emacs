@@ -5,7 +5,7 @@ in
 {
   config = mkIf (config.org.enable && config.evil.enable && config.nogui) {
     initEl = {
-      pos = ''
+      pre = ''
         ;; https://github.com/Somelauw/evil-org-mode#common-issues
         (setq evil-want-C-i-jump nil)
       '';

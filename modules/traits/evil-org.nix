@@ -7,13 +7,14 @@ in
     plugins = with pkgs.emacsPackages; [ evil-org ];
     initEl = {
       pre = ''
-        (require 'evil-org)
+        (setq evil-org-key-theme '(textobjects navigation additional insert todo))
       '';
       main = ''
-        (add-hook 'org-mode-hook 'evil-org-mode)
+        (require 'evil-org)
       '';
       pos = ''
-        (evil-org-set-key-theme '(navigation insert textobjects additional calendar)) ;; HELPME: is this really essential?
+        (evil-org-set-key-theme)
+        (add-hook 'org-mode-hook 'evil-org-mode)
       '';
     };
   };

@@ -7,7 +7,7 @@ in {
   };
   config = {
     initEl.pos = mkIf (config.evil.escesc && config.evil.enable) ''
-    (define-key evil-insert-state-map (kbd "ESC <escape>") 'evil-normal-state)
+      (define-key evil-insert-state-map (kbd "ESC <escape>") 'evil-normal-state)
     '';
   };
 }

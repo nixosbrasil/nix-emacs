@@ -13,10 +13,10 @@ in {
   };
   config = mkIf cfg.enable {
     initEl = {
-      pre = ''
+      main = ''
         (require 'evil)
       '';
-      main = ''
+      pos = ''
         (evil-mode 1)
       '';
     };
