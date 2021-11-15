@@ -12,7 +12,20 @@ in {
       available = mkOption {
         description = "Themes available to just select";
         default = {};
-        type = types.attrsOf (types.listOf types.package);
+        type = types.attrsOf (types.submodule ({...}: {
+          options = {
+            packages = mkOption {
+              description = "Extra packages required for the theme";
+              default = [];
+              type = types.listOf types.package;
+            };
+            supportsNoGui = mkOption {
+              description = "Do the theme works on the CLI mode?";
+              default = false;
+              type = types.bool;
+            };
+          };
+        }));
       };
       selected = mkOption {
         description = "Selected theme";

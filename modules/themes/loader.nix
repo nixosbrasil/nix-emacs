@@ -1,10 +1,14 @@
 {config, lib, ...}:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf optional;
   cfg = config.themes;
-in mkIf (cfg.selected != null) {
-  plugins = cfg.available."${cfg.selected}";
-  initEl.pos = ''
-    (load-theme '${cfg.selected})
-  '';
-}
+in mkIf (cfg.selected != null) (
+  let
+    selected = cfg.available."${cfg.selected}";
+  in {
+    warnings = optional (!selected.supportsNoGui && config.nogui) "the selected theme does not support GUIless mode";
+    plugins = selected.packages;
+    initEl.pos = ''
+      (load-theme '${cfg.selected})
+    '';
+})
