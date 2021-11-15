@@ -5,7 +5,7 @@
     ./warnings.nix
     ./language-support/nix.nix
     ./language-support/markdown.nix
-    ./themes.nix
+    ./themes
 
     ./org
     ./evil
