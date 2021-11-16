@@ -30,7 +30,7 @@ in {
       selected = mkOption {
         description = "Selected theme";
         default = null;
-        type = types.str;
+        type = types.nullOr types.str;
       };
     };
   };
