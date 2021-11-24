@@ -16,6 +16,7 @@ pkgs.callPackage ./default.nix {
     nix.enable = true;
     markdown.enable = true;
   };
+  performance.startup.increase-gc-threshold-on-init = true;
   themes.selected = "manoj-dark";
   org.enable = true;
 }

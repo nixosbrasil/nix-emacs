@@ -10,6 +10,8 @@
     ./org
     ./evil
 
+    ./workarounds
+    ./performance
     ./traits
   ];
 }
