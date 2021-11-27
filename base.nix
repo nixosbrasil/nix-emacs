@@ -69,6 +69,8 @@ in {
           makeWrapper ${overrided}/bin/emacs $out/bin/emacs ${concatStringsSep " " (map (v: ''--add-flags "${v}"'') (flags ++ ["-l" initEl]))}
         '';
       };
+      nixlessBundleZipped =
+        pkgs.runCommandNoCC "nixless-emacs.zip" {} "cd ${config.target.nixlessBundle}; ${pkgs.zip}/bin/zip -r $out .";
       nixlessBundle = builtins.trace "DISCLAIMER: nixless emacs is a very experimental feature. Be careful!"
       pkgs.stdenvNoCC.mkDerivation {
         inherit (overrided.emacs) pname version;
@@ -89,9 +91,16 @@ in {
             echo 'echo "confpath: $CONFPATH"'
             echo 'export EMACSLOADPATH=$CONFPATH/modules:$EMACSLOADPATH'
             echo 'exec "emacs" -l "$CONFPATH/init.el" "$@"'
-          } > $out/emacs
+          } > $out/nemacs
 
-          chmod +x $out/emacs
+          chmod +x $out/nemacs
+
+          {
+            echo 'set "PATH=%PATH;C:\Program Files\Emacs\x86_64\bin"'
+            echo 'set CONFPATH=%~dp0'
+            echo 'set "EMACSLOADPATH=%CONFPATH%modules;"'
+            echo 'start runemacs -l "%CONFPATH%init.el" %*'
+          } > $out/nemacs.bat
         '';
       };
     };
