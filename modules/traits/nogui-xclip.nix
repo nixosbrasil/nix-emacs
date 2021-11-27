@@ -5,8 +5,13 @@ in
 {
   config = mkIf config.nogui {
     plugins = with pkgs.emacsPackages; [ xclip ];
-    initEl.pos = ''
-      (xclip-mode 1)
-    '';
+    initEl = {
+      main = ''
+        (require 'xclip)
+      '';
+      pos = ''
+        (xclip-mode 1)
+      '';
+    };
   };
 }

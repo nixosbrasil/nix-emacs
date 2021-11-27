@@ -52,12 +52,10 @@ in {
       concatStringsSep "\n" (with config.initEl; [ pre main pos ])
     );
     overrided = config.package.pkgs.withPackages config.plugins;
-    flags = config.extraFlags
-      ++ ["-l" initEl]
-    ;
+    flags = config.extraFlags;
   in {
     target = {
-      entrypoint = pkgs.stdenv.mkDerivation {
+      entrypoint = pkgs.stdenvNoCC.mkDerivation {
         inherit (overrided) meta;
         inherit (overrided.emacs) pname version;
 
@@ -68,7 +66,32 @@ in {
           cp -r ${overrided} $out
           chmod +w $out/bin/emacs
           ls $out
-          makeWrapper ${overrided}/bin/emacs $out/bin/emacs ${concatStringsSep " " (map (v: ''--add-flags "${v}"'') flags)}
+          makeWrapper ${overrided}/bin/emacs $out/bin/emacs ${concatStringsSep " " (map (v: ''--add-flags "${v}"'') (flags ++ ["-l" initEl]))}
+        '';
+      };
+      nixlessBundle = builtins.trace "DISCLAIMER: nixless emacs is a very experimental feature. Be careful!"
+      pkgs.stdenvNoCC.mkDerivation {
+        inherit (overrided.emacs) pname version;
+        dontUnpack = true;
+        dontFixup = true;
+        nativeBuildInputs = with pkgs; [ makeWrapper ];
+
+        installPhase = ''
+          mkdir $out/modules -p
+          thePath=`cat ${overrided}/bin/emacs | grep deps | head -n 1 | sed 's;^.*(\(.*\)).*$;\\1;'`
+          cp -rvL $thePath/elpa $out/modules/elpa
+          cp -L $thePath/subdirs.el $out/modules
+          cp ${initEl} $out/init.el
+
+          {
+            echo '#!/usr/bin/env bash'
+            echo 'export CONFPATH=`dirname "$(realpath "$0")"`'
+            echo 'echo "confpath: $CONFPATH"'
+            echo 'export EMACSLOADPATH=$CONFPATH/modules:$EMACSLOADPATH'
+            echo 'exec "emacs" -l "$CONFPATH/init.el" "$@"'
+          } > $out/emacs
+
+          chmod +x $out/emacs
         '';
       };
     };
