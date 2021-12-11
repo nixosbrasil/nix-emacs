@@ -9,6 +9,7 @@
 
     ./org
     ./evil
+    ./magit
 
     ./workarounds
     ./performance
