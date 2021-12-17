@@ -2,6 +2,9 @@
 let
   inherit (lib) mkOption mkEnableOption;
 in {
+  imports = [
+    ./org-roam.nix
+  ];
   options = {
     org = {
       enable = mkEnableOption "org-mode";

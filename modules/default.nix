@@ -10,6 +10,8 @@
     ./org
     ./evil
     ./magit
+    ./lsp
+    ./helm
 
     ./workarounds
     ./performance

@@ -23,5 +23,16 @@ pkgs.callPackage ./default.nix {
   };
   performance.startup.increase-gc-threshold-on-init = true;
   themes.selected = "manoj-dark";
-  org.enable = true;
+  org = {
+    enable = true;
+    roam = {
+      enable = true;
+      # ack-v2 = true;
+    };
+  };
+  helm.enable = true;
+  lsp = {
+    enable = true;
+    lsp-ui.enable = true;
+  };
 }
