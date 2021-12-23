@@ -12,6 +12,7 @@
     ./lsp
     ./helm
     ./company
+    ./yasnippet
 
     ./workarounds
     ./performance

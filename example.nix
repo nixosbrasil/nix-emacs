@@ -33,6 +33,11 @@ pkgs.callPackage ./default.nix {
     };
   };
   helm.enable = true;
+  yasnippet = {
+    enable = true;
+    global-mode.enable = true;
+    official-snippets.enable = true;
+  };
   lsp = {
     enable = true;
     lsp-ui.enable = true;
