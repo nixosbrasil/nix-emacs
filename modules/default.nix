@@ -11,6 +11,7 @@
     ./magit
     ./lsp
     ./helm
+    ./company
 
     ./workarounds
     ./performance

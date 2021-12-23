@@ -16,6 +16,7 @@ pkgs.callPackage ./default.nix {
     escesc = true;
     collection = true;
   };
+  company.enable = true;
   magit.enable = true;
   language-support = {
     nix.enable = true;
