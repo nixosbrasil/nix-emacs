@@ -3,8 +3,7 @@
   imports = [
     ./nogui.nix
     ./warnings.nix
-    ./language-support/nix.nix
-    ./language-support/markdown.nix
+    ./language-support
     ./themes
 
     ./org
