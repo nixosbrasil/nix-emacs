@@ -22,6 +22,7 @@ let
       (args: mainModule)
       ./base.nix
       ./modules
+      ./target.nix
     ];
     specialArgs = specialArgs // {
       inherit pkgs;
