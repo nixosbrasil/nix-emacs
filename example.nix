@@ -24,7 +24,9 @@ pkgs.callPackage ./default.nix {
     golang.enable = true;
   };
   performance.startup.increase-gc-threshold-on-init = true;
-  themes.selected = "manoj-dark";
+  # themes.selected = "manoj-dark";
+  themes.base16-pallete = {
+  };
   org = {
     enable = true;
     roam = {

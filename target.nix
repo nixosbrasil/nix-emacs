@@ -1,9 +1,10 @@
 {pkgs, lib, config, ...}:
 let
-  inherit (builtins) toFile concatStringsSep attrValues;
+  inherit (builtins) concatStringsSep attrValues;
+  inherit (pkgs) writeText;
 in {
   config = let
-    initEl = toFile "init-${config.identifier}.el" (
+    initEl = writeText "init-${config.identifier}.el" (
       concatStringsSep "\n" (with config.initEl; [ pre main pos ])
     );
     overrided = config.package.pkgs.withPackages config.plugins;

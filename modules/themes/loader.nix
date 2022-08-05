@@ -1,4 +1,4 @@
-{config, lib, ...}:
+{config, pkgs, lib, ...}:
 let
   inherit (lib) mkIf optional;
   cfg = config.themes;

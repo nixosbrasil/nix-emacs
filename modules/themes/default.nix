@@ -6,6 +6,7 @@ in {
   imports = [
     ./themes.nix
     ./loader.nix
+    ./base16.nix
   ];
   options = {
     themes = {
